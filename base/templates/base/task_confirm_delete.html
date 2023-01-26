@@ -1,0 +1,18 @@
+{% extends 'base/main.html' %}
+{% load static %}
+{% block content %}
+<div class="delete-task">
+    <div class="center">
+        <form method="POST">
+        {% csrf_token %}
+        <p>Czy chcesz usunąć to zadanie? "{{task}}"</p>
+        <input class="login-button" type="submit" value="Usuń"/>
+    </form>
+        <a href = "{% url 'tasks' %}">Powrót</a>
+    </div>
+
+
+</div>
+
+<script src="{% static '/js/fade-delete.js' %}"></script>
+{% endblock content %}

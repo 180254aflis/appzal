@@ -1,0 +1,56 @@
+{% extends 'base/main.html' %}
+{% load static %}
+{% block content %}
+{% if request.user.is_authenticated %}
+
+<div class="task-list">
+    <div class="header">
+        <div>
+            <h3>Witaj {{request.user|title}}!</h3>
+            <p style="margin:0">Ilość niekompletnych zadań to: <i>{{count}}</i></p>
+        </div>
+        <div class="logout">
+             <a href="{% url 'logout' %}">Wyloguj</a>
+        </div>
+
+    </div>
+    {% else %}
+        <a href="{% url 'login' %}">Zaloguj</a>
+    {% endif %}
+
+    <div class="search-add-wrapper" style="text-align: center;">
+        <h3>Wyszukaj zadanie</h3>
+        <form method="GET">
+            <input class="search-input"  type="text" name="search-area" value="{{search_input}}">
+            <input class="login-button"  type="submit" value="Szukaj">
+        </form>
+        <form action="{% url 'task-create' %}">
+            <input class="create-button" type="submit" value="Utwórz nowe zadanie">
+        </form>
+    </div>
+    <div class="task-itmes-wrapper">
+        {% for task in tasks %}
+            <div class="task-wrapper">
+                {% if task.complete %}
+                <div class="task-title">
+                    <div class="task-complete-icon"></div>
+                    <i><s><a a href="{% url 'task-update' task.id %}">{{task}}</a></s></i>
+                </div>
+                {%else%}
+                <div class="task-title">
+                    <div class="task-incomplete-icon"></div>
+                    <a a href="{% url 'task-update' task.id %}">{{task}}</a>
+                </div>
+
+                {% endif %}
+                <a class="delete-link" href="{% url 'task-delete' task.id %}">&#215;</a>
+            </div>
+
+
+        {% empty %}
+            <h3 style="padding: 10px;">Brak zadań w organizerze!</h3>
+        {% endfor %}
+    </div>
+</div>
+<script src="{% static '/js/task-list.js' %}"></script>
+{% endblock content %}

@@ -1,0 +1,26 @@
+{% extends 'base/main.html' %}
+{% load static %}
+{% block content %}
+
+
+<div class="container-form">
+    <div class="container-login">
+        <h1>WebOrganizer</h1>
+        <h2 class="login-header-h1">Zaloguj</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <h4>Użytkownik:</h4>
+            <p>
+                <input class="login-input" type="text" name="username" autocapitalize="none" autocomplete="username" maxlength="150" required id="id_username">
+            </p>
+            <h4>Hasło:</h4>
+            <p>
+                <input class="login-input" type="password" name="password" autocomplete="current-password" required id="id_password">
+            </p>
+            <input type="submit" class="login-button" value="Zaloguj">
+        </form>
+        <p>Nie masz konta? <a href="{% url 'register' %}">Zarejestruj się</a></p>
+    </div>
+</div>
+<script src="{% static '/js/fade-login.js' %}"></script>
+{% endblock content %}

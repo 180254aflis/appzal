@@ -1,0 +1,35 @@
+
+{% extends 'base/main.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container-register">
+    <h1 class="login-header-h1">Rejestracja</h1>
+    <form method="POST">
+    {% csrf_token %}
+        <p>
+        <h3>Nazwa użytkownika:</h3>
+        <input type="text" class="register-input" name="username" maxlength="150" autocapitalize="none" autocomplete="username" required id="id_username">
+        <p>Wymagane 150 lub mniej znaków. Jedynie litery, cyfry i @/./+/-/_.</p>
+        </p>
+        <p>
+        <h3>Hasło:</h3>
+        <input type="password" class="register-input" name="password1" autocomplete="new-password" required id="id_password1">
+        <p><ul><li>Twoje hasło nie może być zbyt podobne do twoich innych danych osobistych.</li>
+        <li>Twoje hasło musi zawierać co najmniej 8 znaków.</li>
+        <li>Twoje hasło nie może być powszechnie używanym hasłem.</li>
+        <li>Twoje hasło nie może składać się tylko z cyfr.</li></ul></p>
+        </p>
+        <p>
+        <h3>Potwierdzenie hasła:</h3>
+        <input type="password" class="register-input" name="password2" autocomplete="new-password" required id="id_password2">
+        <p>Wprowadź to samo hasło ponownie, dla weryfikacji.</p>
+        </p>
+        <div class="center">
+            <input type="submit"  class="login-button" value="Zarejestruj">
+            <p>Masz już konto? <a href="{% url 'login' %}">Zaloguj się</a></p>
+        </div>
+</form>
+</div>
+<script src="{% static '/js/fade-register.js' %}"></script>
+{% endblock content %}

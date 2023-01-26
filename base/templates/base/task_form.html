@@ -1,0 +1,32 @@
+{% extends 'base/main.html' %}
+{% load static %}
+{% block content %}
+<div class="task-form-div">
+    <h1>Dodaj lub edytuj zadanie</h1>
+
+    <form method="POST" action="">
+        {%csrf_token%}
+        <p>
+            <h3>Tytuł:</h3>
+            <input class="text-input" type="text" name="title" maxlength="200" id="id_title" value="{{task.title}}">
+        </p>
+        <p>
+             <h3>Opis:</h3>
+            <textarea class="textarea-input" name="description" cols="50" rows="10" id="id_description">{{task.description}}</textarea>
+        </p>
+        <p>
+            <label for="id_complete">Ukończono:</label>
+            {% if task.complete is True %}
+                <input type="checkbox" name="complete" id="id_complete" checked>
+            {% else %}
+                <input type="checkbox" name="complete" id="id_complete">
+            {% endif %}
+        </p>
+        <a href = "{% url 'tasks' %}">Powrót</a>
+        <div class="center">
+            <input class="login-button" type="submit" value="Zatwierdź">
+        </div>
+    </form>
+</div>
+<script src="{% static '/js/fade-task-create.js' %}"></script>
+{% endblock content %}
